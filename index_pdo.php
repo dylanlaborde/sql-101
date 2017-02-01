@@ -96,16 +96,23 @@
 $redSocks = ORM::for_table('mes_chaussettes')->where('couleur','rouge')
 ->find_many();
 ?>
-<table>
- 	<tr>
- 		<th>id</th>
- 		
- 	</tr>
+
  	<?php 
 foreach ($redSocks as $redSock) {
 	echo "<table>"."<tr>"."<td>".$redSock->id."</td>"."</tr>"."</table>";
 }
-
-
-
  ?>
+ <h3>Faire déteindre les chaussettes rouges en rose</h3>
+ <?php 
+
+foreach ($redSocks as $redSock) {
+$redSock->couleur ='rose';
+$redSock->save();
+}
+$pinkSocks = ORM::for_table('mes_chaussettes')->where('couleur','rose')
+->find_many();
+foreach ($pinkSocks as $pinkSock) {
+	echo "<li>".$pinkSock->id."->"."$pinkSock->couleur"."</li>";
+}
+
+  ?>

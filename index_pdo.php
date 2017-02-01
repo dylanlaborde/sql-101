@@ -4,7 +4,6 @@
  	'mysql:host=localhost;dbname=mon_armoire;charset=utf8', 
  	'root', 'root');
 
-
  $response = $bdd->query('SELECT * FROM mes_chaussettes');
  ?>
  <!-- TOUTE LES DONNEES -->
@@ -69,6 +68,7 @@
  <?php
 
 // j4mie/idiorm
+
  require_once 'vendor/autoload.php';
 
  ORM::configure('mysql:host=localhost;dbname=mon_armoire');
@@ -77,6 +77,9 @@
  ?>
  <h1>j4mie/idiorm</h1>
  <h3>Afficher tous les id de tous les éléments</h3>
+
+ <!-- ID toute les chaussete -->
+
  <?php 
  $id = ORM::for_table('mes_chaussettes')
  ->select('id')
@@ -90,29 +93,45 @@
  	foreach ($id as $ids) {
  		echo "<table>"."<tr>"."<td>".$ids->id."</td>"."</tr>"."</table>";
  	}?>
- <h3>Afficher les id des chaussettes rouges</h3>
-<?php 
+ 	<h3>Afficher les id des chaussettes rouges</h3>
+ 	<?php 
 
-$redSocks = ORM::for_table('mes_chaussettes')->where('couleur','rouge')
-->find_many();
-?>
+// ID chaussettes rouge
+
+ 	$redSocks = ORM::for_table('mes_chaussettes')->where('couleur','rouge')
+ 	->find_many();
+ 	?>
 
  	<?php 
-foreach ($redSocks as $redSock) {
-	echo "<table>"."<tr>"."<td>".$redSock->id."</td>"."</tr>"."</table>";
-}
- ?>
- <h3>Faire déteindre les chaussettes rouges en rose</h3>
- <?php 
+ 	foreach ($redSocks as $redSock) {
+ 		echo "<table>"."<tr>"."<td>".$redSock->id."</td>"."</tr>"."</table>";
+ 	}
+ 	?>
+ 	<h3>Faire déteindre les chaussettes rouges en rose</h3>
+ 	<?php 
 
-foreach ($redSocks as $redSock) {
-$redSock->couleur ='rose';
-$redSock->save();
-}
-$pinkSocks = ORM::for_table('mes_chaussettes')->where('couleur','rose')
-->find_many();
-foreach ($pinkSocks as $pinkSock) {
-	echo "<li>".$pinkSock->id."->"."$pinkSock->couleur"."</li>";
-}
+// changement couleur chaussettes
 
-  ?>
+ 	foreach ($redSocks as $redSock) {
+ 		$redSock->couleur ='rose';
+ 		$redSock->save();
+ 	}
+ 	$pinkSocks = ORM::for_table('mes_chaussettes')->where('couleur','rose')
+ 	->find_many();
+ 	foreach ($pinkSocks as $pinkSock) {
+ 		echo "<li>".$pinkSock->id."->"."$pinkSock->couleur"."</li>";
+ 	}
+
+ 	?>
+
+ 	<h3>Afficher les id des chaussettes ayant une pointure supérieure à 40</h3>
+
+ 	<!-- Pointure superieur a 40 -->
+ 	<?php 
+
+ 	$socksUnder40 = ORM::for_table('mes_chaussettes')->where_gt('pointure',40)->find_many();
+
+ 	foreach ($socksUnder40 as $socksUnders40) {
+ 		echo "<li>".$socksUnders40->id."</li>";
+ 	}
+ 	?>

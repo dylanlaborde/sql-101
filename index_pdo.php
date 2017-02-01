@@ -91,3 +91,21 @@
  		echo "<table>"."<tr>"."<td>".$ids->id."</td>"."</tr>"."</table>";
  	}?>
  <h3>Afficher les id des chaussettes rouges</h3>
+<?php 
+
+$redSocks = ORM::for_table('mes_chaussettes')->where('couleur','rouge')
+->find_many();
+?>
+<table>
+ 	<tr>
+ 		<th>id</th>
+ 		
+ 	</tr>
+ 	<?php 
+foreach ($redSocks as $redSock) {
+	echo "<table>"."<tr>"."<td>".$redSock->id."</td>"."</tr>"."</table>";
+}
+
+
+
+ ?>

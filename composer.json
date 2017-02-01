@@ -1,0 +1,12 @@
+{
+    "name": "root/sql-101",
+    "authors": [
+        {
+            "name": "Dylan",
+            "email": "dylan4047@gmail.com"
+        }
+    ],
+    "require": {
+        "j4mie/idiorm": "^1.5"
+    }
+}
